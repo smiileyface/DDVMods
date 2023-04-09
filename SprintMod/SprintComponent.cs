@@ -36,16 +36,16 @@ namespace SprintMod
 
                 if (clipName.StartsWith("locomotion_run") && Input.GetKey(SprintMod.sprintKey.Value))
                 {
-                    if (SprintMod.debugMode.Value && avatar.RunSpeedMultiplier < SprintMod.sprintMultiplier.Value)
+                    if (SprintMod.debugMode.Value && avatar.moveSpeedMultiplier < SprintMod.sprintMultiplier.Value)
                         Melon<SprintMod>.Logger.Msg("Now Sprinting");
-                    avatar.RunSpeedMultiplier = SprintMod.sprintMultiplier.Value;
+                    avatar.moveSpeedMultiplier = SprintMod.sprintMultiplier.Value;
                     animator.speed = 1 / SprintMod.sprintMultiplier.Value;
                 }
                 else
                 {
-                    if (SprintMod.debugMode.Value && avatar.RunSpeedMultiplier > 1)
+                    if (SprintMod.debugMode.Value && avatar.moveSpeedMultiplier > 1)
                         Melon<SprintMod>.Logger.Msg("No longer Sprinting");
-                    avatar.RunSpeedMultiplier = 1;
+                    avatar.moveSpeedMultiplier = 1;
                     animator.speed = 1;
                 }
             }

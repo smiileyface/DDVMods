@@ -26,12 +26,15 @@ namespace ScroogeShopExtraRefresh
 
             refreshWindows = GenerateRefreshWindows();
 
-            LoggerInstance.Msg($"Refresh Windows:");
-            foreach (var window in refreshWindows)
-                LoggerInstance.Msg($" - {window.start} - {window.end}");
 
             if (debug.Value)
+            {
+                LoggerInstance.Msg($"Refresh Windows:");
+                foreach (var window in refreshWindows)
+                    LoggerInstance.Msg($" - {window.start} - {window.end}");
+
                 LoggerInstance.Msg("Mod loaded");
+            }
         }
 
         [HarmonyPatch(typeof(StoreInfo), nameof(StoreInfo.CanRefreshStore))]
@@ -69,7 +72,7 @@ namespace ScroogeShopExtraRefresh
         static bool CanRefresh(Il2CppSystem.DateTime now, Il2CppSystem.DateTime lastRefresh)
         {
             var diff = now - lastRefresh;
-            return diff.Hours >= refreshFrequency.Value || refreshWindows.Any(window => now.Hour >= window.start.Hour && now.Hour < window.end.Hour && lastRefresh.Hour < window.start.Hour);
+            return diff.TotalHours >= refreshFrequency.Value || refreshWindows.Any(window => now >= window.start && now < window.end && lastRefresh < window.start);
         }
 
         static List<RefreshWindow> GenerateRefreshWindows()

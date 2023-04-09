@@ -13,11 +13,17 @@
     <Reference Include="Il2CppInterop.Runtime">
       <HintPath>D:\Games\Steam\steamapps\common\Disney Dreamlight Valley\MelonLoader\net6\Il2CppInterop.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Il2CppMeta">
-      <HintPath>D:\Games\Steam\steamapps\common\Disney Dreamlight Valley\MelonLoader\Il2CppAssemblies\Il2CppMeta.dll</HintPath>
+    <Reference Include="Il2CppMeta.Definitions">
+      <HintPath>D:\Games\Steam\steamapps\common\Disney Dreamlight Valley\MelonLoader\Il2CppAssemblies\Il2CppMeta.Definitions.dll</HintPath>
     </Reference>
     <Reference Include="Il2Cppmscorlib">
       <HintPath>D:\Games\Steam\steamapps\common\Disney Dreamlight Valley\MelonLoader\Il2CppAssemblies\Il2Cppmscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem">
+      <HintPath>D:\Games\Steam\steamapps\common\Disney Dreamlight Valley\MelonLoader\Il2CppAssemblies\Il2CppSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Core">
+      <HintPath>D:\Games\Steam\steamapps\common\Disney Dreamlight Valley\MelonLoader\Il2CppAssemblies\Il2CppSystem.Core.dll</HintPath>
     </Reference>
     <Reference Include="MelonLoader">
       <HintPath>D:\Games\Steam\steamapps\common\Disney Dreamlight Valley\MelonLoader\net6\MelonLoader.dll</HintPath>
