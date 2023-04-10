@@ -1,6 +1,9 @@
 ﻿using MelonLoader;
 using HarmonyLib;
+using Il2CppMdl.Grid;
 using Il2CppDefinitions.Grid;
+using Il2CppMdl.Ui;
+using UnityEngine;
 
 namespace NoObjectLimit
 {
@@ -22,46 +25,63 @@ namespace NoObjectLimit
                 LoggerInstance.Msg("Mod Loaded");
         }
 
+        [HarmonyPatch(typeof(GridEditMode))]
+        class GridEditModePatches
+        {
+            [HarmonyPostfix]
+            [HarmonyPatch(nameof(GridEditMode.CanAdd))]
+            static void CanAdd(ref Il2CppSystem.Threading.Tasks.Task<bool> __result)
+            {
+                if (!modEnabled.Value)
+                    return;
+
+                if (isDebug.Value)
+                    Melon<NoObjectLimit>.Logger.Msg($"CanAdd Before -> {__result.Result}");
+                __result = new Il2CppSystem.Threading.Tasks.Task<bool>(true);
+            }
+
+            [HarmonyPostfix]
+            [HarmonyPatch(nameof(GridEditMode.CanAddObjectFromBackpack))]
+            static void CanAddObjectFromBackpack(ref bool __result)
+            {
+                if (!modEnabled.Value)
+                    return;
+
+                if (isDebug.Value)
+                    Melon<NoObjectLimit>.Logger.Msg($"CanAddObjectFrombackpack Before -> {__result}");
+                __result = true;
+            }
+        }
+
         [HarmonyPatch(typeof(VillageObjectLimit))]
         class VillageObjectLimitPatches
         {
-            [HarmonyPrefix]
+            [HarmonyPostfix]
             [HarmonyPatch(nameof(VillageObjectLimit.IsGoingOverLimit))]
-            static bool IsGoingOverLimit(ref bool __result)
+            static void IsGoingOverLimit(ref bool __result)
             {
                 if (!modEnabled.Value)
-                    return true;
+                    return;
 
                 if (isDebug.Value)
                     Melon<NoObjectLimit>.Logger.Msg($"IsGoingOverLimit Before -> {__result}");
                 __result = false;
-                return false;
             }
+        }
 
-            [HarmonyPrefix]
-            [HarmonyPatch(nameof(VillageObjectLimit.AllCount), MethodType.Getter)]
-            static bool AllCount(ref int __result)
+        [HarmonyPatch(typeof(HudLimit))]
+        class HudLimitPatches
+        {
+            [HarmonyPostfix]
+            [HarmonyPatch(nameof(HudLimit._disableColor), MethodType.Getter)]
+            static void DisableColor(ref Color32 __result)
             {
                 if (!modEnabled.Value)
-                    return true;
+                    return;
 
                 if (isDebug.Value)
-                    Melon<NoObjectLimit>.Logger.Msg($"AllCount Before -> {__result}");
-                __result = 0;
-                return false;
-            }
-
-            [HarmonyPrefix]
-            [HarmonyPatch(nameof(VillageObjectLimit.UniqueCount), MethodType.Getter)]
-            static bool UniqueCount(ref int __result)
-            {
-                if (!modEnabled.Value)
-                    return true;
-
-                if (isDebug.Value)
-                    Melon<NoObjectLimit>.Logger.Msg($"UniqueCount Before -> {__result}");
-                __result = 0;
-                return false;
+                    Melon<NoObjectLimit>.Logger.Msg($"disableColor Before -> {__result}");
+                __result = Color.white;
             }
         }
     }
