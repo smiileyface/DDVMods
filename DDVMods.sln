@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SprintMod", "SprintMod\Spri
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScroogeShopExtraRefresh", "ScroogeShopExtraRefresh\ScroogeShopExtraRefresh.csproj", "{CCA89D20-896A-48C6-8961-1BCCD8CD5161}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoObjectLimit", "NoObjectLimit\NoObjectLimit.csproj", "{7F60BBD0-0AE3-4945-8492-5A990D7961D7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{CCA89D20-896A-48C6-8961-1BCCD8CD5161}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCA89D20-896A-48C6-8961-1BCCD8CD5161}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCA89D20-896A-48C6-8961-1BCCD8CD5161}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F60BBD0-0AE3-4945-8492-5A990D7961D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F60BBD0-0AE3-4945-8492-5A990D7961D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F60BBD0-0AE3-4945-8492-5A990D7961D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F60BBD0-0AE3-4945-8492-5A990D7961D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

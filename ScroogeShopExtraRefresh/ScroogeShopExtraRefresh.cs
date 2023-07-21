@@ -20,12 +20,11 @@ namespace ScroogeShopExtraRefresh
         {
             prefsCat = MelonPreferences.CreateCategory("Scrooge Shop Extra Refresh");
 
-            modEnabled = prefsCat.CreateEntry("Enabled", true);
-            refreshFrequency = prefsCat.CreateEntry("Refresh Frequency Hours", 12);
-            debug = prefsCat.CreateEntry("Debug", false);
+            modEnabled = prefsCat.CreateEntry("Enabled", true, description: "Enable this mod.");
+            refreshFrequency = prefsCat.CreateEntry("Refresh Frequency Hours", 12, description: "Frequency, in hours, to refresh the Scrooge general store.");
+            debug = prefsCat.CreateEntry("Debug", false, description: "Enable debug logs for this mod.");
 
             refreshWindows = GenerateRefreshWindows();
-
 
             if (debug.Value)
             {
@@ -37,11 +36,14 @@ namespace ScroogeShopExtraRefresh
             }
         }
 
-        [HarmonyPatch(typeof(StoreInfo), nameof(StoreInfo.CanRefreshStore))]
-        public class StoreInfo_CanRefreshStore_Patch
+        [HarmonyPatch(typeof(StoreInfo))]
+        public class StoreInfo_Patch
         {
-            private static bool Prefix(ref StoreInfo __instance, ref bool __result, Il2CppSystem.DateTime now)
+            [HarmonyPatch(nameof(StoreInfo.CanRefreshStore))]
+            [HarmonyPrefix]
+            private static bool CanRefreshStore(ref StoreInfo __instance, ref bool __result, Il2CppSystem.DateTime now)
             {
+                Melon<ScroogeShopExtraRefresh>.Logger.Msg($"BuildingItemID: {__instance.BuildingItemID}");
                 if (!modEnabled.Value || __instance.BuildingItemID != ScroogeStoreId)
                     return true;
 
